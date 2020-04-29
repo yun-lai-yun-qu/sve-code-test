@@ -1,7 +1,10 @@
 CC=gcc
 CFLAGS=-O0 -I. -march=armv8.2-a+sve
-DEPS = 
-OBJ = test1.o
+DEPS =
+OBJ = test1.o sve_assembly-debug.os
+
+%.os: %.S $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -9,5 +12,6 @@ OBJ = test1.o
 test1: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
+
 clean:
-	rm -f *.o test1
+	rm -f *.o *.os test1
