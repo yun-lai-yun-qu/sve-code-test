@@ -1,0 +1,7 @@
+This is for testing Arm SVE features.
+
+Compile:
+$ make
+
+Run:
+$ test1
