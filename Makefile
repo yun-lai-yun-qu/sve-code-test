@@ -1,17 +1,17 @@
 CC=gcc
-CFLAGS=-O1 -g -I. -march=armv8.2-a+sve
+OPTS?=-O1
+CFLAGS=-I. -march=armv8.2-a+sve
 DEPS =
 OBJ = test1.o
 
 %.os: %.S $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(OPTS) $(CFLAGS)
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(OPTS) $(CFLAGS)
 
 test1: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
-
+	$(CC) -o $@ $^ $(OPTS) $(CFLAGS)
 
 clean:
 	rm -f *.o *.os test1
