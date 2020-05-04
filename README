@@ -1,7 +1,11 @@
-This is for testing Arm SVE features.
+This is for testing Arm SVE features. What's special is the compiler flag
+"-march=armv8.2-a+sve".
 
-Compile:
+To compile:
 $ make
 
-Run:
-$ test1
+To run, either you need a real SVE-capable hardware:
+$ ./test1
+
+or, you need an emulator, such as qemu-aarch64:
+$ qemu-aarch64 -cpu max,sve256=on test1
