@@ -79,6 +79,17 @@ void test_svld1_f64( void )
 	return;
 }
 
+void test_divide_12 ( int a )
+{
+	long register b;
+	long int c;
+	scanf("Input: %l", &c);
+	b = c / 12;
+	printf("Resutl: %l", b);
+	return;
+}
+
+
 void main()
 {
 	int sum;
@@ -117,4 +128,6 @@ void main()
 
 	// test svld1_f64();
 	test_svld1_f64();
+	// how assembly divide
+	test_divide_12( sum );
 }
