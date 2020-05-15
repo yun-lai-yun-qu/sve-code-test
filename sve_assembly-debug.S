@@ -122,6 +122,16 @@ FUNC:
     str z2, [x2]
     str z3, [x2, #1, MUL VL]
 
+    // test how disassembly goes
+    dup z2.d, #0
+
+    // test wether integer 0 is ok in the instructions
+//	fmov		v16.2d, #0.0  // nok
+	dup  v16.2d, xzr  // ok
+
+	fmov		z16.d, #0.0   // ok
+//	fmov		d16, #0       // nok
+	fmov		d16, xzr      // ok
 /*************************************************************
  * restore registers
 **************************************************************/
