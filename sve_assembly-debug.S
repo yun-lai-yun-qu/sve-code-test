@@ -126,11 +126,19 @@ FUNC:
     dup z2.d, #0
 
     // test wether integer 0 is ok in the instructions
-//	fmov		v16.2d, #0.0  // nok
-	dup  v16.2d, xzr  // ok
+	// fmov		v16.2d, #0.0  // nok
+	// fmov		v16.2d, #0  // nok
+	// fmov		d16, #0.0       // nok
+	// fmov		d16, #0       // nok
+
+   // instead, use this for FP registers:
+       movi v16.2d, #0    // ok
+       movi d16, #0      // ok
 
 	fmov		z16.d, #0.0   // ok
-//	fmov		d16, #0       // nok
+	fmov		z16.d, #0   // ok
+
+	dup  v16.2d, xzr  // ok
 	fmov		d16, xzr      // ok
 /*************************************************************
  * restore registers
