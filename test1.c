@@ -97,12 +97,8 @@ void main()
 	testSVE();
 	printf("hello world \n");
 	printf("vector length (bytes): %d\n", svcntb());
-//	__START_TRACE();
 	example_sum_squares(1000, &sum);
-//	__STOP_TRACE();
 	printf("sum %d\n", sum);
-
-        printf("call assembly routines\n");
 
 	double packA[16] = { 1.0, 1.1, 1.2, 1.3,
                              2.0, 2.1, 2.2, 2.3 };
@@ -114,9 +110,12 @@ void main()
         printf("%f, %f, %f, %f\n", packA[0], packA[1], packA[2], packA[3]);
         printf("%f, %f, %f, %f\n", packA[4], packA[5], packA[6], packA[7]);
 
+        printf("call assembly routines\n");
 	// input: packA
 	// output: packB, C
+	__START_TRACE();
         bl_dtrmm_asm_sve_8x8( k, packA, packB, C, 0, NULL, 0 );
+	__STOP_TRACE();
 
 	printf("Copied by ldr/str:\n");
         printf("%f, %f, %f, %f\n", C[0], C[1], C[2], C[3]);

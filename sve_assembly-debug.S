@@ -108,6 +108,10 @@ FUNC:
     ldr z0, [x1]
     ldr z1, [x1, #1, MUL VL]
 
+    // multiply
+    fmul z1.d, z0.d, z1.d
+    fmul z0.d, z1.d, z0.d
+
     // store to C
     str z0, [x3]
     str z1, [x3, #1, MUL VL]
@@ -117,6 +121,10 @@ FUNC:
     // load from packA using ld1d (scalar puls immediate)
     ld1d z2.d, p0/z, [x1]
     ld1d z3.d, p0/z, [x1, #1, MUL VL]
+
+    // multiply
+    fmul z2.d, z3.d, z1.d
+    fmul z3.d, z2.d, z0.d
 
     // store to packB
     str z2, [x2]

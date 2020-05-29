@@ -13,5 +13,8 @@ OBJ = test1.o sve_assembly-debug.os
 test1: $(OBJ)
 	$(CC) -o $@ $^ $(OPTS) $(CFLAGS)
 
+example-armie: example-armie.c
+	$(CC) -o $@ $^ $(OPTS) $(CFLAGS)
+
 clean:
-	rm -f *.o *.os test1
+	rm -f *.o *.os test1 example-armie
