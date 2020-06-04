@@ -116,20 +116,24 @@ FUNC:
     str z0, [x3]
     str z1, [x3, #1, MUL VL]
 
-    ptrue   p0.d, all
+#if 1
+    // test %12 loop
+    mov x9, #130
+    mov x10, x9             // x10 is the remainder, 
+    mov x11, #0              // x11 is the quotient
+    subs x10, x10, #12
+    blt .L8_M8_BEGIN
+.L8_M12_20:
+    add x11, x11, #1
+    subs x10, x10, #12
+    bge .L8_M12_20
 
-    // load from packA using ld1d (scalar puls immediate)
-    ld1d z2.d, p0/z, [x1]
-    ld1d z3.d, p0/z, [x1, #1, MUL VL]
+.L8_M8_BEGIN:
+    adds x10, x10, #12
 
-    // multiply
-    fmul z2.d, z3.d, z1.d
-    fmul z3.d, z2.d, z0.d
-
-    // store to packB
-    str z2, [x2]
-    str z3, [x2, #1, MUL VL]
-
+    // store x10 and x11
+    stp x11, x10, [x2]
+#endif
     // test how disassembly goes
     dup z2.d, #0
 
