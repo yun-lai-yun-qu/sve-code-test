@@ -1,5 +1,12 @@
 CC=gcc
-OPTS?=-O1
+# nok OPTS?=-O3 -ftree-vectorize -ftree-vectorizer-verbose=6
+# ok OPTS?=-ftree-vectorize -ftree-vectorizer-verbose=2 -fdump-tree-vect-details -fopt-info -O2 -fopt-info-vec-missed
+# ok OPTS?=-ftree-vectorize -O2 -fopt-info-vec-all 
+# ok OPTS?=-O3 -fopt-info-vec-optimized -fopt-info-vec-missed 
+# ok OPTS?=-O3 -fopt-info-vec-optimized -fopt-info-vec-missed 
+# ok OPTS?=-O3 -fopt-info-vec-note -fopt-info-vec-optimized -fopt-info-vec-missed 
+OPTS?=-O3 -fopt-info-vec-optimized-missed=vec.opt.log #-fopt-info-vec-missed 
+
 CFLAGS=-I. -march=armv8.2-a+sve
 DEPS =
 OBJ = test1.o sve_assembly-debug.os
