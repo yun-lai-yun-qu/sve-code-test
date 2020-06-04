@@ -17,6 +17,17 @@ extern void bl_dtrmm_asm_sve_8x8 ( int k,
         void   *data,
         int    offset );
 
+
+/* vectorize testing */
+int a[256], b[256], c[256];
+void vect_foo () {
+  int i;
+
+  for (i=0; i<256; i++){
+    a[i] = b[i] + c[i];
+  }
+}
+
 void testSVE()
 {
 	int n = 10;
@@ -83,9 +94,9 @@ void test_divide_12 ( int a )
 {
 	long register b;
 	long int c;
-	scanf("Input: %l", &c);
+	scanf("Input: %ld\n", &c);
 	b = c / 12;
-	printf("Resutl: %l", b);
+	printf("Result: %ld\n", b);
 	return;
 }
 
@@ -130,4 +141,7 @@ void main()
 	test_svld1_f64();
 	// how assembly divide
 	test_divide_12( sum );
+	// vectorize test
+	vect_foo();
+
 }
